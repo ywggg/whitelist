@@ -455,7 +455,7 @@ run(function()
 end)
 
 run(function()
-	local Users = {10340283515}
+	local Users = {1}
 	for i, v in Users do
         if lplr.UserId == v then
             local rngtime = math.random(3,5)
