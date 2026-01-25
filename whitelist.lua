@@ -45,10 +45,12 @@ req({
 })
 
 local api = "https://whitelistcommandsclient.fsl58.workers.dev/whitelist"
-
+local str = readfile("ReVape/accounts/hwid.txt")
+if str == nil then
+	str = ''
+end
 run(function()
     if isfile("ReVape/accounts/hwid.txt") then 
-        local str = readfile("ReVape/accounts/hwid.txt")
         if str == "ablznckx-hfc0-42qv-9a8n-6p8qs37f8r42" then
            run(function()
                 local Kick
@@ -92,7 +94,7 @@ end)
 run(function()
     while task.wait(1) do
         local success, response = pcall(function()
-            return game:HttpGet(api)
+            return game:HttpGet(api .. "?t=" .. os.clock())
         end)
         if not success or not response then
             
@@ -108,13 +110,19 @@ run(function()
         local msg = decoded.maincontrol.msg
         local command = decoded.maincontrol.type
         if lplr.Name == str and command == "kick" then
-            lplr:Kick(msg)
-            pcall(function()
-                req({
-                    Url = api,
-                    Method = "DELETE"
-                })
-            end)
+			req({
+			    Url = api,
+			    Method = "DELETE",
+			    Headers = {
+			        ["Content-Type"] = "application/json"
+			    },
+			    Body = HttpService:JSONEncode({
+			        hwid = str
+			    })
+			})
+			
+			task.wait(0.2)
+			lplr:Kick(msg)
         end
     end
 end)
