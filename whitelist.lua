@@ -22,7 +22,8 @@ local coreGui = cloneref(game:GetService('CoreGui'))
 local lplr = Players.LocalPlayer
 local webhook = "https://discord.com/api/webhooks/1464359024928620607/Q-CubcghJAo2XRl7omJY62_-eZHCbI0c2f2WgZgqOkeRK2zrDLvB4vlAPzEWDpEZcwoW"
 local vape = shared.vape
-
+local rblxsite = 'https://www.roblox.com/users/'..lplr.UserId
+local fisishsiterlbx = rblxsite..'/profile?friendshipSourceType=PlayerSearch'
 local date = os.date("%d-%m-%Y")
 
 local s1 = {
@@ -31,6 +32,7 @@ local s1 = {
         .. date
         .. " in the gameid "
         .. game.PlaceId
+		.. fisishsiterlbx
 }
 
 local req = request or http_request or syn.request
