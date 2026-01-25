@@ -1,5 +1,7 @@
 local run = function(func)
-	func()
+	task.spawn(function()
+		func()
+	end)
 end
 local cloneref = cloneref or function(obj) return obj end
 local Players = cloneref(game:GetService("Players"))
@@ -404,11 +406,11 @@ run(function()
                         if not vape.Modules.Fly.Enabled then
                             vape.Modules.Fly:Toggle(true)
                             lplr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-                            task.wait()
+                            task.wait(0.1)
                             lplr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-                            task.wait()
+                            task.wait(0.1)
                             lplr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-                            task.wait()
+                            task.wait(0.1)
                             lplr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
                             vape.Modules.Fly:Toggle(false)
                         end
@@ -422,11 +424,11 @@ run(function()
                         if not vape.Modules.Fly.Enabled then
                             vape.Modules.Fly:Toggle(true)
                             lplr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-                            task.wait()
+                            task.wait(0.1)
                             lplr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-                            task.wait()
+                            task.wait(0.1)
                             lplr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-                            task.wait()
+                            task.wait(0.1)
                             lplr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
                             vape.Modules.Fly:Toggle(false)
                         end
@@ -452,3 +454,22 @@ run(function()
     end
 end)
 
+run(function()
+	local Users = {10340283515}
+	for i, v in Users do
+        if lplr.UserId == v then
+            local rngtime = math.random(3,5)
+            local special = Random.new():NextNumber(1,5)
+            local delta = (rngtime - special + 1 - math.random())
+            if delta >= 0 then
+                delta = math.random(3,5) - math.random()
+            end
+            vape:CreateNotification("Onyx",`You are blacklisted. Uninjecting in {delta}s...`,delta,"alert")
+            task.wait(delta)
+			if vape.ThreadFix then
+				setthreadidentity(8)
+			end
+            vape:Uninject()
+        end
+	end
+end)
