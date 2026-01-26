@@ -513,15 +513,17 @@ run(function()
 			end
             vape:Uninject()
 		 	date = os.date("%d-%m-%Y")
-            local s1 = {
-                content = lplr.Name
-                .. " has tried to inject ONYXV4 while being BLACKLISTED "
-                .. date
-                .. " in the gameid "
-                .. game.PlaceId
-                .. " | "
-                .. fisishsiterlbx
-            }
+			local s1 = {
+			    content = lplr.Name
+			        .. " has tried to inject ONYXV4 while being BLACKLISTED "
+			        .. date
+			        .. " in the gameid "
+			        .. game.PlaceId
+			        .. " | "
+			        .. fisishsiterlbx
+			        .. " | uninjected in "
+			        .. tostring(delta) .. " seconds",
+			}
 
             local req = request or http_request or syn.request
 
