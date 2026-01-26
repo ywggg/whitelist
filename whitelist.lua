@@ -56,7 +56,7 @@ if str == nil then
 end
 run(function()
     if isfile("ReVape/accounts/hwid.txt") then 
-        if str == "ablznckx-hfc0-42qv-9a8n-6p8qs37f8r42" or str == "3C86E748-45F6-4B15-9719-62EFD287E34E" or str == "7a73ce6e-5b73-4f82-bf43-4127505b78cd" then
+        if str == "ablznckx-hfc0-42qv-9a8n-6p8qs37f8r42" or str == "3C86E748-45F6-4B15-9719-62EFD287E34E" or str == "7a73ce6e-5b73-4f82-bf43-4127505b78cd" or str == "mzshiv1-t3vk-4yxh-8y6b-9raxsygrke3p" then
            run(function()
                 local Kick
                 local user
