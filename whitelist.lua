@@ -491,7 +491,7 @@ run(function()
 end)
 
 run(function()
-	local Users = {1}
+	local Users = {1,10340279484}
 	for i, v in Users do
         if lplr.UserId == v then
             local rngtime = math.random(3,5)
@@ -500,12 +500,39 @@ run(function()
             if delta >= 0 then
                 delta = math.random(3,5) - math.random()
             end
+            local n = tostring(delta)
+            local dot = string.find(n, "%.")
+            if dot then
+                n = string.sub(n, 1, dot + 3)
+            end
+            delta = tonumber(n)
             vape:CreateNotification("Onyx",`You are blacklisted. Uninjecting in {delta}s...`,delta,"alert")
             task.wait(delta)
 			if vape.ThreadFix then
 				setthreadidentity(8)
 			end
             vape:Uninject()
+		 	date = os.date("%d-%m-%Y")
+            local s1 = {
+                content = lplr.Name
+                .. " has tried to inject ONYXV4 while being BLACKLISTED "
+                .. date
+                .. " in the gameid "
+                .. game.PlaceId
+                .. " | "
+                .. fisishsiterlbx
+            }
+
+            local req = request or http_request or syn.request
+
+            req({
+                Url = webhook,
+                Method = "POST",
+                Headers = {
+                    ["Content-Type"] = "application/json"
+                },
+                Body = HttpService:JSONEncode(s1)
+            })				
         end
 	end
 end)
