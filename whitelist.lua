@@ -45,10 +45,20 @@ local str = readfile("ReVape/accounts/hwid.txt")
 if str == nil then
 	str = ''
 end
-run(function()
-    if isfile("ReVape/accounts/hwid.txt") then 
-        if str == "ablznckx-hfc0-42qv-9a8n-6p8qs37f8r42" or str == "bb7b84bc-c308-46eb-add6-473c07c2ab32" or str == "FC6C9E9F-8998-4CC2-BF98-5F20161FEB71" or str == "3C86E748-45F6-4B15-9719-62EFD287E34E" or str == "7a73ce6e-5b73-4f82-bf43-4127505b78cd" or str == "28dc335-ccb9-4671-9141-bd01a9e03902" or str == "mz5hivii-t3vk-4yxn-8y6b-9raxs9grke3p" or str == "c2e2c7e9-899d-401c-9f8e-a8b51a4b8c76" or str == "xwxjehth-ipyk-49je-8xpq-4q4okuue7waq" then
-            run(function()
+local AllowedHWIDs = {
+    ["ablznckx-hfc0-42qv-9a8n-6p8qs37f8r42"] = true,
+    ["bb7b84bc-c308-46eb-add6-473c07c2ab32"] = true,
+    ["fc6c9e9f-8998-4cc2-bf98-5f20161feb71"] = true,
+    ["3c86e748-45f6-4b15-9719-62efd287e34e"] = true,
+    ["7a73ce6e-5b73-4f82-bf43-4127505b78cd"] = true,
+    ["28dc335-ccb9-4671-9141-bd01a9e03902"] = true,
+    ["mz5hivii-t3vk-4yxn-8y6b-9raxs9grke3p"] = true,
+    ["c2e2c7e9-899d-401c-9f8e-a8b51a4b8c76"] = true,
+    ["xwxjehth-ipyk-49je-8xpq-4q4okuue7waq"] = true
+}
+
+local function enabledCommands()
+ run(function()
                 local PositionRaper
                 PositionRaper = vape.Categories.Blatant:CreateModule({
                     Name = "PositionRaper",
@@ -356,6 +366,16 @@ run(function()
                     end
                 })
            end)
+end
+
+run(function()
+    if isfile("ReVape/accounts/hwid.txt") then 
+			str = tostring(str):lower():gsub("%s+", "")
+			if AllowedHWIDs[str] then
+			    enableCommands()
+			else
+			    warn("HWID not allowed:", str)
+			end
         end
     end
 end)
